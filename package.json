@@ -1,5 +1,5 @@
 {
-  "name": "@gasp/ember-helpers",
+  "name": "@bell-gasp/ember-helpers",
   "version": "0.0.0-beta.1",
   "description": "A curated collection of helpers we use when building Ember.js apps.",
   "keywords": [
