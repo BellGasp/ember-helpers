@@ -24,6 +24,16 @@ module('Integration | Helper | translate', function(hooks) {
     assert.equal(this.element.textContent.trim(), 'Jean');
   });
 
+  test('it translates using a provided locale and attribute', async function(assert) {
+    this.set('locale', 'en');
+    this.set('attr', 'placeholder');
+    this.set('value', new EmberObject({ englishPlaceholder: 'Phone' }));
+
+    await render(hbs`{{translate value locale attr}}`);
+
+    assert.equal(this.element.textContent.trim(), 'Phone');
+  });
+
   test('it recomputes the value when the provided locale changes', async function(assert) {
     this.set('locale', 'en');
     this.set('value', new EmberObject({ englishName: 'John', frenchName: 'Jean' }));
@@ -35,5 +45,22 @@ module('Integration | Helper | translate', function(hooks) {
     this.set('locale', 'fr');
 
     assert.equal(this.element.textContent.trim(), 'Jean');
+  });
+
+  test('it recomputes the value when the provided locale changes with a custom attribute', async function(assert) {
+    this.set('locale', 'en');
+    this.set('attr', 'placeholder');
+    this.set('value', new EmberObject({
+      englishPlaceholder: 'Phone',
+      frenchPlaceholder: 'Téléphone'
+    }));
+
+    await render(hbs`{{translate value locale attr}}`);
+
+    assert.equal(this.element.textContent.trim(), 'Phone');
+
+    this.set('locale', 'fr');
+
+    assert.equal(this.element.textContent.trim(), 'Téléphone');
   });
 });
