@@ -1,1 +1,1 @@
-export { default, translate } from 'ember-helpers/helpers/translate';
+export { default, translate } from '@bell-gasp/ember-helpers/helpers/translate';
