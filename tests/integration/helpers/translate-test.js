@@ -63,4 +63,27 @@ module('Integration | Helper | translate', function(hooks) {
 
     assert.equal(this.element.textContent.trim(), 'Téléphone');
   });
+
+  test('it recomputes when the target property of the object changes', async function (assert) {
+    this.setProperties({
+      locale: 'en',
+      attr: 'placeholder',
+      value: EmberObject.create({
+        englishPlaceholder: 'Phone',
+        frenchPlaceholder: 'Téléphone'
+      })
+    });
+
+    await render(hbs`{{translate value locale attr}}`);
+
+    assert.equal(this.element.textContent.trim(), 'Phone');
+
+    this.set('value.englishPlaceholder', 'Pog');
+
+    assert.equal(this.element.textContent.trim(), 'Pog');
+
+    this.set('value.englishPlaceholder', 'Champion');
+
+    assert.equal(this.element.textContent.trim(), 'Champion');
+  });
 });
