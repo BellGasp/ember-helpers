@@ -8,7 +8,7 @@ module('Integration | Helper | translate', function(hooks) {
   setupRenderingTest(hooks);
 
   test('it translates using the default locale and default attribute', async function(assert) {
-    this.set('value', new EmberObject({ englishName: 'John' }));
+    this.set('value', EmberObject.create({ englishName: 'John' }));
 
     await render(hbs`{{translate value}}`);
 
@@ -17,7 +17,7 @@ module('Integration | Helper | translate', function(hooks) {
 
   test('it translates using a provided locale and a default attribute', async function(assert) {
     this.set('locale', 'fr');
-    this.set('value', new EmberObject({ frenchName: 'Jean' }));
+    this.set('value', EmberObject.create({ frenchName: 'Jean' }));
 
     await render(hbs`{{translate value locale}}`);
 
@@ -27,7 +27,7 @@ module('Integration | Helper | translate', function(hooks) {
   test('it translates using a provided locale and attribute', async function(assert) {
     this.set('locale', 'en');
     this.set('attr', 'placeholder');
-    this.set('value', new EmberObject({ englishPlaceholder: 'Phone' }));
+    this.set('value', EmberObject.create({ englishPlaceholder: 'Phone' }));
 
     await render(hbs`{{translate value locale attr}}`);
 
@@ -36,7 +36,7 @@ module('Integration | Helper | translate', function(hooks) {
 
   test('it recomputes the value when the provided locale changes', async function(assert) {
     this.set('locale', 'en');
-    this.set('value', new EmberObject({ englishName: 'John', frenchName: 'Jean' }));
+    this.set('value', EmberObject.create({ englishName: 'John', frenchName: 'Jean' }));
 
     await render(hbs`{{translate value locale}}`);
 
@@ -50,7 +50,7 @@ module('Integration | Helper | translate', function(hooks) {
   test('it recomputes the value when the provided locale changes with a custom attribute', async function(assert) {
     this.set('locale', 'en');
     this.set('attr', 'placeholder');
-    this.set('value', new EmberObject({
+    this.set('value', EmberObject.create({
       englishPlaceholder: 'Phone',
       frenchPlaceholder: 'Téléphone'
     }));
